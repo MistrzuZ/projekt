@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 // import Loading from './Components/Loading/Loading';
 import Navigation from './Components/Navigation/Navigation';
+import 'tachyons';
 
 class App extends Component {
   constructor(props) {
