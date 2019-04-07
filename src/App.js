@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 // import Loading from './Components/Loading/Loading';
 import Navigation from './Components/Navigation/Navigation';
+import InputForm from './Components/InputForm/InputForm';
 import 'tachyons';
 import Particles from 'react-particles-js';
 
@@ -62,6 +63,7 @@ class App extends Component {
       <div className="App">
         <Particles params={params} className="particles"/>
         <Navigation />
+        <InputForm />
         {/* <Loading /> */}
       </div>
     );
