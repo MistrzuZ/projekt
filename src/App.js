@@ -3,6 +3,7 @@ import './App.css';
 // import Loading from './Components/Loading/Loading';
 import Navigation from './Components/Navigation/Navigation';
 import InputForm from './Components/InputForm/InputForm';
+import DisplayerImage from './Components/DisplayerImage/DisplayerImage';
 import 'tachyons';
 import Particles from 'react-particles-js';
 
@@ -64,6 +65,7 @@ class App extends Component {
         <Particles params={params} className="particles"/>
         <Navigation />
         <InputForm />
+        <DisplayerImage />
         {/* <Loading /> */}
       </div>
     );
