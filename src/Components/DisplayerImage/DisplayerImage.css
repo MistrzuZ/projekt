@@ -3,6 +3,7 @@
     max-width: 750px;
 }
 
-#image {
-
+.serdecznie {
+    background: #0E0C22;
+    display: inline-block;
 }

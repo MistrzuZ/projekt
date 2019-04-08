@@ -104,7 +104,7 @@ class App extends Component {
         <Navigation />
         <InputForm buttonClick={this.buttonClick} inputUpdater={this.inputUpdater}/>
         {(this.state.predict)
-        ? <DisplayerImage url={this.state.url}/> : ''
+        ? <DisplayerImage predict={this.state.predict} url={this.state.url}/> : ''
         }
         {(this.state.loading)
         ? <Loading /> : ''
