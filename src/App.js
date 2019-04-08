@@ -78,21 +78,22 @@ class App extends Component {
   }
 
     buttonClick = () => {
-    this.setState({loading: true})
-    this.setState({url: this.state.input});
+        this.setState({predict: ''})
+        this.setState({loading: true})
+        this.setState({url: this.state.input});
         app.models
-        .initModel({id: Clarifai.GENERAL_MODEL, version: "aa7f35c01e0642fda5cf400f543e7c40"})
-        .then(generalModel => {
-            return generalModel.predict(this.state.input, {language: 'pl'});
-        })
-        .then(response => {
-            const concepts = response['outputs'][0]['data']['concepts'];
-            this.predictsAssign(concepts);
-        })
-        .then(() => this.setState({loading: false}))
-        .catch((err) =>{
-            console.log(err)
-            this.setState({loading: false})
+            .initModel({id: Clarifai.GENERAL_MODEL, version: "aa7f35c01e0642fda5cf400f543e7c40"})
+            .then(generalModel => {
+                return generalModel.predict(this.state.input, {language: 'pl'});
+            })
+            .then(response => {
+                const concepts = response['outputs'][0]['data']['concepts'];
+                this.predictsAssign(concepts);
+            })
+            .then(() => this.setState({loading: false}))
+            .catch((err) =>{
+                console.log(err)
+                this.setState({loading: false})
         })
     }
 
