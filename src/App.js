@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-// import Loading from './Components/Loading/Loading';
+import Loading from './Components/Loading/Loading';
 import Navigation from './Components/Navigation/Navigation';
 import InputForm from './Components/InputForm/InputForm';
 import DisplayerImage from './Components/DisplayerImage/DisplayerImage';
@@ -63,6 +63,7 @@ class App extends Component {
         input: '',
         url: '',
         predict: '',
+        loading: false,
     }
   }
 
@@ -76,17 +77,24 @@ class App extends Component {
     console.log(this.state.predict);
   }
 
-  buttonClick = () => {
-    this.setState({url: this.state.input})
+  appModel = () => {
     app.models
-        .initModel({id: Clarifai.GENERAL_MODEL, version: "aa7f35c01e0642fda5cf400f543e7c40"})
-        .then(generalModel => {
-            return generalModel.predict("https://i.kinja-img.com/gawker-media/image/upload/s--HqfzgkTd--/c_scale,f_auto,fl_progressive,q_80,w_800/wp2qinp6fu0d8guhex9v.jpg", {language: 'pl'});
-        })
-        .then(response => {
+    .initModel({id: Clarifai.GENERAL_MODEL, version: "aa7f35c01e0642fda5cf400f543e7c40"})
+    .then(generalModel => {
+        return generalModel.predict(this.state.input, {language: 'pl'});
+    })
+    .then(response => {
         const concepts = response['outputs'][0]['data']['concepts'];
         this.predictsAssign(concepts);
-      })
+    })
+    .catch(console.log)
+  }
+
+  buttonClick = () => {
+    this.setState({loading: true})
+    this.setState({url: this.state.input})
+    setTimeout(this.appModel,1000)
+    this.setState({loading: false})
   }
 
   render() {
@@ -95,11 +103,12 @@ class App extends Component {
         <Particles params={params} className="particles"/>
         <Navigation />
         <InputForm buttonClick={this.buttonClick} inputUpdater={this.inputUpdater}/>
-        {(this.state.url)
-        ? <DisplayerImage url={this.state.url}/>
-        : 123
+        {(this.state.predict)
+        ? <DisplayerImage url={this.state.url}/> : ''
         }
-        {/* <Loading /> */}
+        {(this.state.loading)
+        ? <Loading /> : ''
+        }
       </div>
     );
   }
