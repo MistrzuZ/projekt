@@ -60,8 +60,15 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+        input: '',
+        url: '',
+        predict: '',
     }
+  }
+
+  inputUpdater = (e) => {
+      this.setState({ input: e.target.value});
+      console.log(this.state.input)
   }
 
   predictsAssign = (data) => {
@@ -70,13 +77,14 @@ class App extends Component {
   }
 
   buttonClick = () => {
+    this.setState({url: this.state.input})
     app.models
         .initModel({id: Clarifai.GENERAL_MODEL, version: "aa7f35c01e0642fda5cf400f543e7c40"})
         .then(generalModel => {
             return generalModel.predict("https://i.kinja-img.com/gawker-media/image/upload/s--HqfzgkTd--/c_scale,f_auto,fl_progressive,q_80,w_800/wp2qinp6fu0d8guhex9v.jpg", {language: 'pl'});
         })
         .then(response => {
-        var concepts = response['outputs'][0]['data']['concepts'];
+        const concepts = response['outputs'][0]['data']['concepts'];
         this.predictsAssign(concepts);
       })
   }
@@ -86,8 +94,11 @@ class App extends Component {
       <div className="App">
         <Particles params={params} className="particles"/>
         <Navigation />
-        <InputForm buttonClick={this.buttonClick}/>
-        <DisplayerImage />
+        <InputForm buttonClick={this.buttonClick} inputUpdater={this.inputUpdater}/>
+        {(this.state.url)
+        ? <DisplayerImage url={this.state.url}/>
+        : 123
+        }
         {/* <Loading /> */}
       </div>
     );
