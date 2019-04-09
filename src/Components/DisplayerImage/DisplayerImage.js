@@ -4,7 +4,7 @@ import './DisplayerImage.css';
 
 const DisplayerImage = ({ url, predict }) => {
     return (
-        <div className="flex flex-wrap justify-around mh5">
+        <div className="divek center flex flex-wrap justify-around">
             <div>
                 <div className="eldo center pa3 ma3 br3 shadow-5">
                     <img
