@@ -1,8 +1,8 @@
 import React from 'react';
 import Predictions from '../Predictions/Predictions';
-import './DisplayerImage.css';
+import './GeneralImage.css';
 
-const DisplayerImage = ({ url, predict }) => {
+const GeneralImage = ({ url, predict }) => {
     return (
         <div className="divek center flex flex-wrap justify-around">
             <div>
@@ -24,7 +24,7 @@ const DisplayerImage = ({ url, predict }) => {
                                     key={i}
                                     name={name.name}
                                     value={name.value}
-                                />
+                                 />
                             )
                         })
                     }
@@ -34,4 +34,4 @@ const DisplayerImage = ({ url, predict }) => {
     )
 }
 
-export default DisplayerImage;
+export default GeneralImage;

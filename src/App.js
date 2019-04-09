@@ -3,7 +3,7 @@ import './App.css';
 import Loading from './Components/Loading/Loading';
 import Navigation from './Components/Navigation/Navigation';
 import InputForm from './Components/InputForm/InputForm';
-import DisplayerImage from './Components/DisplayerImage/DisplayerImage';
+import GeneralImage from './Components/GeneralImage/GeneralImage';
 import Clarifai from 'clarifai';
 import 'tachyons';
 import Particles from 'react-particles-js';
@@ -80,20 +80,30 @@ class App extends Component {
     buttonClick = () => {
         this.setState({predict: ''})
         this.setState({loading: true})
-        this.setState({url: this.state.input});
+        this.setState({url: this.state.input})
         app.models
-            .initModel({id: Clarifai.GENERAL_MODEL, version: "aa7f35c01e0642fda5cf400f543e7c40"})
-            .then(generalModel => {
-                return generalModel.predict(this.state.input, {language: 'pl'});
-            })
+            .predict("c0c0ac362b03416da06ab3fa36fb58e3", this.state.input)
             .then(response => {
-                const concepts = response['outputs'][0]['data']['concepts'];
+                const concepts = response.outputs[0].data.regions;
                 this.predictsAssign(concepts);
             })
             .then(() => this.setState({loading: false}))
             .catch((err) =>{
                 console.log(err)
                 this.setState({loading: false})
+        // app.models
+        //     .initModel({id: Clarifai.GENERAL_MODEL, version: "aa7f35c01e0642fda5cf400f543e7c40"})
+        //     .then(generalModel => {
+        //         return generalModel.predict(this.state.input, {language: 'en'});
+        //     })
+        //     .then(response => {
+        //         const concepts = response['outputs'][0]['data']['concepts'];
+        //         this.predictsAssign(concepts);
+        //     })
+        //     .then(() => this.setState({loading: false}))
+        //     .catch((err) =>{
+        //         console.log(err)
+        //         this.setState({loading: false})
         })
     }
 
@@ -103,9 +113,9 @@ class App extends Component {
         <Particles params={params} className="particles"/>
         <Navigation />
         <InputForm buttonClick={this.buttonClick} inputUpdater={this.inputUpdater}/>
-        {(this.state.predict)
-        ? <DisplayerImage predict={this.state.predict} url={this.state.url}/> : ''
-        }
+        {/* {(this.state.predict)
+        ? <GeneralImage predict={this.state.predict} url={this.state.url}/> : ''
+        } */}
         {(this.state.loading)
         ? <Loading /> : ''
         }
