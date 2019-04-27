@@ -64,6 +64,7 @@ class App extends Component {
         url: '',
         predict: '',
         loading: false,
+        route: 'predictGeneral'
     }
   }
 
@@ -77,45 +78,54 @@ class App extends Component {
     console.log(this.state.predict);
   }
 
+  changeRoute = (r) => {
+    this.setState({route: r, input: '', url: '', predict: ''})
+    console.log(this.state.route)
+  }
+
     buttonClick = () => {
         this.setState({predict: ''})
         this.setState({loading: true})
         this.setState({url: this.state.input})
-        app.models
-            .predict("c0c0ac362b03416da06ab3fa36fb58e3", this.state.input)
-            .then(response => {
-                const concepts = response.outputs[0].data.regions;
-                this.predictsAssign(concepts);
+        if (this.state.route === 'predictFace') {
+            app.models
+                .predict("c0c0ac362b03416da06ab3fa36fb58e3", this.state.input)
+                .then(response => {
+                    const concepts = response.outputs[0].data.regions;
+                    this.predictsAssign(concepts);
+                })
+                .then(() => this.setState({loading: false}))
+                .catch(err =>{
+                    console.log(err)
+                    this.setState({loading: false})})
+        }
+        if (this.state.route === 'predictGeneral') {
+            app.models
+                .initModel({id: Clarifai.GENERAL_MODEL, version: "aa7f35c01e0642fda5cf400f543e7c40"})
+                .then(generalModel => {
+                    return generalModel.predict(this.state.input, {language: 'en'});
+                })
+                .then(response => {
+                    const concepts = response['outputs'][0]['data']['concepts'];
+                    this.predictsAssign(concepts);
+                })
+                .then(() => this.setState({loading: false}))
+                .catch((err) =>{
+                    console.log(err)
+                    this.setState({loading: false})
             })
-            .then(() => this.setState({loading: false}))
-            .catch((err) =>{
-                console.log(err)
-                this.setState({loading: false})
-        // app.models
-        //     .initModel({id: Clarifai.GENERAL_MODEL, version: "aa7f35c01e0642fda5cf400f543e7c40"})
-        //     .then(generalModel => {
-        //         return generalModel.predict(this.state.input, {language: 'en'});
-        //     })
-        //     .then(response => {
-        //         const concepts = response['outputs'][0]['data']['concepts'];
-        //         this.predictsAssign(concepts);
-        //     })
-        //     .then(() => this.setState({loading: false}))
-        //     .catch((err) =>{
-        //         console.log(err)
-        //         this.setState({loading: false})
-        })
+        }
     }
 
   render() {
     return (
       <div className="App">
         <Particles params={params} className="particles"/>
-        <Navigation />
+        <Navigation changeRoute={this.changeRoute} />
         <InputForm buttonClick={this.buttonClick} inputUpdater={this.inputUpdater}/>
-        {/* {(this.state.predict)
-        ? <GeneralImage predict={this.state.predict} url={this.state.url}/> : ''
-        } */}
+        {(this.state.predict)
+        ? <GeneralImage predict={this.state.predict} url={this.state.url} route={this.state.route} /> : ''
+        }
         {(this.state.loading)
         ? <Loading /> : ''
         }

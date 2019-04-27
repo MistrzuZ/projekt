@@ -2,7 +2,7 @@ import React from 'react';
 import Predictions from '../Predictions/Predictions';
 import './GeneralImage.css';
 
-const GeneralImage = ({ url, predict }) => {
+const GeneralImage = ({ url, predict, route }) => {
     return (
         <div className="divek center flex flex-wrap justify-around">
             <div>
@@ -14,7 +14,8 @@ const GeneralImage = ({ url, predict }) => {
                     />
                 </div>
             </div>
-            <div>
+            {(route === 'predictGeneral')
+            ?<div>
                 <div className="serdecznie center pa3 ma3 br3 shadow-5 tl">
                     <h2>Przypuszczenia:</h2>
                     {
@@ -30,6 +31,8 @@ const GeneralImage = ({ url, predict }) => {
                     }
                 </div>
             </div>
+            : ''
+            }
         </div>
     )
 }
