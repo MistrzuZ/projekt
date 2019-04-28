@@ -1,37 +1,52 @@
 import React from 'react';
 import Predictions from '../Predictions/Predictions';
+import BoxCreator from './BoxCreator/BoxCreator';
 import './GeneralImage.css';
 
-const GeneralImage = ({ url, predict, route }) => {
-    return (
+const GeneralImage = ({ input, predict, route }) => {
+        return (
         <div className="divek center flex flex-wrap justify-around">
             <div>
                 <div className="eldo center pa3 ma3 br3 shadow-5">
                     <img
                         id="image"
+                        src={input}
                         alt=""
-                        src={url}
+                        width="500px"
+                        heigh="auto"
                     />
-                </div>
-            </div>
-            {(route === 'predictGeneral')
-            ?<div>
-                <div className="serdecznie center pa3 ma3 br3 shadow-5 tl">
-                    <h2>Przypuszczenia:</h2>
-                    {
-                        predict.map((name, i) => {
+                    {predict.map((box, i) => {
                             return (
-                                <Predictions
+                                <BoxCreator
                                     key={i}
-                                    name={name.name}
-                                    value={name.value}
-                                 />
+                                    bottomRow={box.bottomRow}
+                                    leftCol={box.leftCol}
+                                    rightCol={box.rightCol}
+                                    topRow={box.topRow}
+                                />
                             )
                         })
                     }
                 </div>
             </div>
-            : ''
+            {(route === 'predictGeneral')
+                ?<div>
+                    <div className="serdecznie center pa3 ma3 br3 shadow-5 tl">
+                        <h2>Przypuszczenia:</h2>
+                        {
+                            predict.map((name, i) => {
+                                return (
+                                    <Predictions
+                                        key={i}
+                                        name={name.name}
+                                        value={name.value}
+                                    />
+                                )
+                            })
+                        }
+                    </div>
+                </div>
+                : ''
             }
         </div>
     )

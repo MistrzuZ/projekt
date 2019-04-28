@@ -68,31 +68,46 @@ class App extends Component {
     }
   }
 
+  boxUpdate = (response) => {
+    const image = document.getElementById('image');
+    const width = Number(image.width);
+    const height = Number(image.height);
+    const arrayResponse = response.outputs[0].data.regions
+    const boxes = arrayResponse.map(region => region.region_info.bounding_box);
+    const predict = boxes.map(box => {
+      const { bottom_row, left_col, right_col, top_row } = box;
+      return {
+        leftCol: left_col * width,
+        topRow: top_row * height,
+        rightCol: width - (right_col * width),
+        bottomRow: height - (bottom_row * height)
+      }
+    })
+    this.setState({predict})
+  }
+
   inputUpdater = (e) => {
-      this.setState({ input: e.target.value});
-      console.log(this.state.input)
+      this.setState({ url: e.target.value});
   }
 
   predictsAssign = (data) => {
     this.setState({ predict: data})
-    console.log(this.state.predict);
   }
 
   changeRoute = (r) => {
     this.setState({route: r, input: '', url: '', predict: ''})
-    console.log(this.state.route)
   }
 
     buttonClick = () => {
         this.setState({predict: ''})
         this.setState({loading: true})
-        this.setState({url: this.state.input})
+        this.setState({input: this.state.url})
         if (this.state.route === 'predictFace') {
             app.models
-                .predict("c0c0ac362b03416da06ab3fa36fb58e3", this.state.input)
+                .predict(Clarifai.FACE_DETECT_MODEL, this.state.url)
                 .then(response => {
-                    const concepts = response.outputs[0].data.regions;
-                    this.predictsAssign(concepts);
+                    this.setState({predict: true})
+                    this.boxUpdate(response);
                 })
                 .then(() => this.setState({loading: false}))
                 .catch(err =>{
@@ -124,7 +139,8 @@ class App extends Component {
         <Navigation changeRoute={this.changeRoute} />
         <InputForm buttonClick={this.buttonClick} inputUpdater={this.inputUpdater}/>
         {(this.state.predict)
-        ? <GeneralImage predict={this.state.predict} url={this.state.url} route={this.state.route} /> : ''
+        ? <GeneralImage predict={this.state.predict} input={this.state.input} route={this.state.route} />
+        : ''
         }
         {(this.state.loading)
         ? <Loading /> : ''
