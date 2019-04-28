@@ -1,24 +1,3 @@
-.divek {
-    max-width: 1200px;
-}
-
-.eldo {
-    background: #0E0C22;
-    max-width: 750px;
-}
-
-.serdecznie {
-    background: #0E0C22;
-    display: inline-block;
-}
-
-#image {
-    width: 95%;
-    max-width: 700px;
-    height: auto;
-    align-items: center;
-    align-self: center;
-}
 
 .bounding-box {
     position: absolute;

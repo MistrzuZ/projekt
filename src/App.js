@@ -84,6 +84,7 @@ class App extends Component {
       }
     })
     this.setState({predict})
+    console.log(this.state.predict)
   }
 
   inputUpdater = (e) => {
@@ -139,7 +140,7 @@ class App extends Component {
         <Navigation changeRoute={this.changeRoute} />
         <InputForm buttonClick={this.buttonClick} inputUpdater={this.inputUpdater}/>
         {(this.state.predict)
-        ? <GeneralImage predict={this.state.predict} input={this.state.input} route={this.state.route} />
+        ? <GeneralImage predict={this.state.predict} input={this.state.input} route={this.state.route} loading={this.state.loading} />
         : ''
         }
         {(this.state.loading)

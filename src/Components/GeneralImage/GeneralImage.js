@@ -3,7 +3,8 @@ import Predictions from '../Predictions/Predictions';
 import BoxCreator from './BoxCreator/BoxCreator';
 import './GeneralImage.css';
 
-const GeneralImage = ({ input, predict, route }) => {
+const GeneralImage = ({ input, predict, route, loading }) => {
+    console.log(route)
         return (
         <div className="divek center flex flex-wrap justify-around">
             <div>
@@ -15,7 +16,8 @@ const GeneralImage = ({ input, predict, route }) => {
                         width="500px"
                         heigh="auto"
                     />
-                    {predict.map((box, i) => {
+                    {(route === "predictFace" && !loading)
+                        ? predict.map((box, i) => {
                             return (
                                 <BoxCreator
                                     key={i}
@@ -26,6 +28,7 @@ const GeneralImage = ({ input, predict, route }) => {
                                 />
                             )
                         })
+                        : ''
                     }
                 </div>
             </div>
