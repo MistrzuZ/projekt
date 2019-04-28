@@ -5,7 +5,7 @@ import './GeneralImage.css';
 
 const GeneralImage = ({ input, predict, route, loading }) => {
         return (
-        <div className="center">
+        <div className="center" style={(loading) ? {visibility: 'hidden'} : {visibility: 'visible'}} >
             <div>
                 <div className="box-image absolute mt2 pa2">
                     <img
