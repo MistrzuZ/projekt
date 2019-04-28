@@ -84,7 +84,7 @@ class App extends Component {
       }
     })
     this.setState({predict})
-    console.log(this.state.predict)
+    .then(this.setState({loading: false}))
   }
 
   inputUpdater = (e) => {
@@ -96,7 +96,7 @@ class App extends Component {
   }
 
   changeRoute = (r) => {
-    this.setState({route: r, input: '', url: '', predict: ''})
+    this.setState({route: r, input: '', predict: ''})
   }
 
     buttonClick = () => {
@@ -106,13 +106,11 @@ class App extends Component {
         if (this.state.route === 'predictFace') {
             app.models
                 .predict(Clarifai.FACE_DETECT_MODEL, this.state.url)
+                .then(this.setState({predict: true}))
                 .then(response => {
-                    this.setState({predict: true})
                     this.boxUpdate(response);
                 })
-                .then(() => this.setState({loading: false}))
                 .catch(err =>{
-                    console.log(err)
                     this.setState({loading: false})})
         }
         if (this.state.route === 'predictGeneral') {

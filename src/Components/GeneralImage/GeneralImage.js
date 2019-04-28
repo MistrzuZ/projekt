@@ -4,11 +4,10 @@ import BoxCreator from './BoxCreator/BoxCreator';
 import './GeneralImage.css';
 
 const GeneralImage = ({ input, predict, route, loading }) => {
-    console.log(route)
         return (
-        <div className="divek center flex flex-wrap justify-around">
+        <div className="center">
             <div>
-                <div className="eldo center pa3 ma3 br3 shadow-5">
+                <div className="box-image absolute mt2 pa2">
                     <img
                         id="image"
                         src={input}
@@ -32,7 +31,7 @@ const GeneralImage = ({ input, predict, route, loading }) => {
                     }
                 </div>
             </div>
-            {(route === 'predictGeneral')
+            {(route === 'predictGeneral' && !loading)
                 ?<div>
                     <div className="serdecznie center pa3 ma3 br3 shadow-5 tl">
                         <h2>Przypuszczenia:</h2>
