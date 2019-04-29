@@ -106,11 +106,11 @@ class App extends Component {
       if (this.state.route === 'predictFace') {
           app.models
               .predict(Clarifai.FACE_DETECT_MODEL, this.state.url)
-              .then(this.setState({predict: true}))
+              .then(this.setState({facePredict: true}))
               .then(response => this.boxUpdate(response))
               .catch(err =>{
                   console.log(err)
-                  this.setState({loading: false, predict: false})
+                  this.setState({loading: false, facePredict: 'bad link'})
               })
       }
       if (this.state.route === 'predictGeneral') {
@@ -121,7 +121,7 @@ class App extends Component {
             .then(() => this.setState({loading: false}))
             .catch((err) =>{
                 console.log(err)
-                this.setState({loading: false})
+                this.setState({loading: false, generalPredict: 'bad link'})
         })
     }
 }
@@ -131,9 +131,11 @@ class App extends Component {
       <div className="App">
         <Particles params={params} className="particles"/>
         <Navigation changeRoute={this.changeRoute} route={this.state.route} />
-        <InputForm buttonClick={this.buttonClick} inputUpdater={this.inputUpdater}/>
-        {(this.state.generalPredict) ? <GeneralImage predict={this.state.generalPredict} input={this.state.input} route={this.state.route} loading={this.state.loading} /> : '' }
-        {(this.state.facePredict) ? <FaceImage predict={this.state.facePredict} input={this.state.input} route={this.state.route} loading={this.state.loading} /> : '' }
+        <div className="flex flex-wrap flex-row">
+          <InputForm buttonClick={this.buttonClick} inputUpdater={this.inputUpdater}/>
+          {(this.state.generalPredict) ? <GeneralImage predict={this.state.generalPredict} input={this.state.input} route={this.state.route} loading={this.state.loading} /> : '' }
+          {(this.state.facePredict) ? <FaceImage predict={this.state.facePredict} input={this.state.input} route={this.state.route} loading={this.state.loading} /> : '' }
+        </div>
         {(this.state.loading) ? <Loading /> : '' }
       </div>
     );
