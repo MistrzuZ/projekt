@@ -59,17 +59,24 @@ const params = {
   "retina_detect": true
 }
 
+const initialState = {
+  users: {
+    email: 'john@gmail.com',
+    password: 'cookies'
+  },
+  input: '',
+  url: '',
+  generalPredict: '',
+  facePredict: '',
+  loading: false,
+  isLogin: false,
+  route: 'login'
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-        input: '',
-        url: '',
-        generalPredict: '',
-        facePredict: '',
-        loading: false,
-        route: 'login'
-    }
+    this.state = initialState;
   }
 
   boxUpdate = (response) => {
@@ -90,17 +97,25 @@ class App extends Component {
     this.setState({facePredict, loading:false})
   }
 
-  inputUpdater = (e) => {
-      this.setState({ url: e.target.value});
+  inputUpdater = (v) => {
+      this.setState({ url: v.target.value});
   }
 
-  predictsAssign = (data) => {
-    const generalPredict = data['outputs'][0]['data']['concepts'];
+  predictsAssign = (v) => {
+    const generalPredict = v['outputs'][0]['data']['concepts'];
     this.setState({generalPredict})
   }
 
-  changeRoute = (r) => {
-    this.setState({route: r, generalPredict: '', facePredict: ''})
+  changeRoute = (v) => {
+    this.setState({route: v, generalPredict: '', facePredict: ''})
+  }
+
+  changeLogin = (v) => {
+    this.setState({isLogin: v})
+  }
+
+  changeLoading = (v) => {
+    this.setState({loading: v})
   }
 
   buttonClick = () => {
@@ -134,7 +149,7 @@ class App extends Component {
         <Particles params={params} className="particles"/>
         <Navigation changeRoute={this.changeRoute} route={this.state.route} />
         {(this.state.route === 'login')
-          ? <Login />
+          ? <Login users={this.state.users} changeLogin={this.changeLogin} changeRoute={this.changeRoute} changeLoading={this.changeLoading} />
           : (this.state.route === 'register')
           ? <Register />
           : <div className="flex flex-wrap flex-row ma5 pa3">

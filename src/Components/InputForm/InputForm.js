@@ -14,7 +14,7 @@ const InputForm = ({ buttonClick, inputUpdater }) => {
                 <div className="center pa1 w-100">
                     <input
                         onChange={inputUpdater}
-                        className="f7 b pa2 input-reset ba hover-bg-black hover-white w-100"
+                        className="f7 b pa2 input-reset ba w-100"
                         type="url"
                     />
                     <input
