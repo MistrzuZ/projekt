@@ -112,6 +112,9 @@ class App extends Component {
 
   changeLogin = (v) => {
     this.setState({isLogin: v})
+    if (!v) {
+      this.setState(initialState)
+    }
   }
 
   changeLoading = (v) => {
@@ -147,7 +150,7 @@ class App extends Component {
     return (
       <div className="App">
         <Particles params={params} className="particles"/>
-        <Navigation changeRoute={this.changeRoute} route={this.state.route} />
+        <Navigation changeRoute={this.changeRoute} route={this.state.route} isLogin={this.state.isLogin} changeLogin={this.changeLogin} />
         {(this.state.route === 'login')
           ? <Login users={this.state.users} changeLogin={this.changeLogin} changeRoute={this.changeRoute} changeLoading={this.changeLoading} />
           : (this.state.route === 'register')
