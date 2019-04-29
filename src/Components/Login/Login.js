@@ -10,7 +10,7 @@ class Login extends React.Component {
         return (
             <div className="center">
                 <form className="measure moj-kolor pa4 ma4 br4 shadow-5">
-                    <p className="f4 fw6 ph0 mh0">Zaloguj</p>
+                    <p className="f3 fw6 ph0 mh0">Zaloguj</p>
                     <div className="mt3">
                         <label className="db fw6 lh-copy f6">Email</label>
                         <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" />
@@ -20,7 +20,7 @@ class Login extends React.Component {
                         <input className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" />
                     </div>
                     <div>
-                        <input className="b ph3 pv2 input-reset ba bg-transparent grow pointer f6 dib" type="submit" value="Login" />
+                        <input className="b ph3 pv2 input-reset ba bg-transparent grow pointer f6 dib white" type="submit" value="Zaloguj" />
                     </div>
                     <div className="lh-copy mt3">
                         <p className="f6 link dim db pointer">Zarejestruj</p>

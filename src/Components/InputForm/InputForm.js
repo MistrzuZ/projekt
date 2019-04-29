@@ -14,13 +14,12 @@ const InputForm = ({ buttonClick, inputUpdater }) => {
                 <div className="center pa1 w-100">
                     <input
                         onChange={inputUpdater}
-                        className="f5 w-70 center dib"
+                        className="f7 b pa2 input-reset ba hover-bg-black hover-white w-100"
                         type="url"
-                        placeholder="http://interia.com/image.png"
                     />
                     <input
                         onClick={buttonClick}
-                        className="f5 w-30 center dib grow dark-gray bg-moon-gray"
+                        className="f5 w-30 b ph3 pv2 input-reset ba bg-transparent grow pointer f6 dib white"
                         type="submit"
                         value="Proszę zaczynać!"
                     />
