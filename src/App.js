@@ -5,6 +5,8 @@ import Navigation from './Components/Navigation/Navigation';
 import InputForm from './Components/InputForm/InputForm';
 import GeneralImage from './Components/GeneralImage/GeneralImage';
 import FaceImage from './Components/FaceImage/FaceImage';
+import Register from './Components/Register/Register';
+import Login from './Components/Login/Login';
 import Clarifai from 'clarifai';
 import 'tachyons';
 import Particles from 'react-particles-js';
@@ -66,7 +68,7 @@ class App extends Component {
         generalPredict: '',
         facePredict: '',
         loading: false,
-        route: 'predictGeneral'
+        route: 'login'
     }
   }
 
@@ -98,7 +100,7 @@ class App extends Component {
   }
 
   changeRoute = (r) => {
-    this.setState({route: r, input: '', generalPredict: '', facePredict: ''})
+    this.setState({route: r, generalPredict: '', facePredict: ''})
   }
 
   buttonClick = () => {
@@ -131,11 +133,16 @@ class App extends Component {
       <div className="App">
         <Particles params={params} className="particles"/>
         <Navigation changeRoute={this.changeRoute} route={this.state.route} />
-        <div className="flex flex-wrap flex-row">
-          <InputForm buttonClick={this.buttonClick} inputUpdater={this.inputUpdater}/>
-          {(this.state.generalPredict) ? <GeneralImage predict={this.state.generalPredict} input={this.state.input} route={this.state.route} loading={this.state.loading} /> : '' }
-          {(this.state.facePredict) ? <FaceImage predict={this.state.facePredict} input={this.state.input} route={this.state.route} loading={this.state.loading} /> : '' }
-        </div>
+        {(this.state.route === 'login')
+          ? <Login />
+          : (this.state.route === 'register')
+          ? <Register />
+          : <div className="flex flex-wrap flex-row ma5 pa3">
+            <InputForm buttonClick={this.buttonClick} inputUpdater={this.inputUpdater}/>
+            {(this.state.generalPredict) ? <GeneralImage predict={this.state.generalPredict} input={this.state.input} route={this.state.route} loading={this.state.loading} /> : '' }
+            {(this.state.facePredict) ? <FaceImage predict={this.state.facePredict} input={this.state.input} route={this.state.route} loading={this.state.loading} /> : '' }
+            </div>
+        }
         {(this.state.loading) ? <Loading /> : '' }
       </div>
     );
