@@ -31,7 +31,7 @@ class FaceImage extends React.Component {
                                     topRow={box.topRow}
                                 />
                             )})
-                            : <p>No face on image or bad link :((</p>
+                            : <p>Na zdjęciu nie ma twarzy, lub link jest niepoprawny :((</p>
                         }
                     </div>
                 </div>

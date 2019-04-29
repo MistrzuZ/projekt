@@ -7,7 +7,7 @@ class Navigation extends React.Component {
     }
     render () {
          return (
-            <div className="moj-kolor f4 flex flex-row justify-between">
+            <div className="moj-kolor f5 flex flex-row justify-between">
                     {(this.props.isLogin) ?
                         <div className="menu flex flex-row justify-around">
                             <div onClick={() => this.props.changeRoute('predictGeneral')} className="pa3 link dim pointer" style={(this.props.route === 'predictGeneral') ? {opacity: 1, borderBottom: 'solid 1px'} : {opacity: 0.6}}>Zawartość obrazka</div>
