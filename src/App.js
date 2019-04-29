@@ -154,7 +154,7 @@ class App extends Component {
         {(this.state.route === 'login')
           ? <Login users={this.state.users} changeLogin={this.changeLogin} changeRoute={this.changeRoute} changeLoading={this.changeLoading} />
           : (this.state.route === 'register')
-          ? <Register />
+          ? <Register changeLogin={this.changeLogin} changeRoute={this.changeRoute} changeLoading={this.changeLoading} />
           : <div className="flex flex-wrap flex-row ma5 pa3">
             <InputForm buttonClick={this.buttonClick} inputUpdater={this.inputUpdater}/>
             {(this.state.generalPredict) ? <GeneralImage predict={this.state.generalPredict} input={this.state.input} route={this.state.route} loading={this.state.loading} /> : '' }

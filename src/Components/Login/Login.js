@@ -5,7 +5,8 @@ class Login extends React.Component {
         super(props)
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            error: false
         }
     }
 
@@ -26,6 +27,7 @@ class Login extends React.Component {
             this.props.changeRoute('predictGeneral')
             this.props.changeLoading(false)
         } else {
+            this.setState({error: true})
             this.props.changeLoading(false)
         }
     }
@@ -34,7 +36,7 @@ class Login extends React.Component {
         return (
             <div className="center">
                 <form className="measure moj-kolor pa4 ma4 br4 shadow-5">
-                    <p className="f3 fw6 ph0 mh0">Zaloguj</p>
+                    <p className="f3 fw6 ph0 mh0">Logowanie</p>
                     <div className="mt3">
                         <label className="db fw6 lh-copy f6">Email</label>
                         <input
@@ -58,9 +60,10 @@ class Login extends React.Component {
                             value="Zaloguj"
                             onClick={this.clickLogin}
                         />
+                        {(this.state.error) ? <label className="db pt2 fw6 red lh-copy f6">Błędny login lub hasło</label> : ''}
                     </div>
                     <div className="lh-copy mt3">
-                        <p className="f6 link dim db pointer">Zarejestruj</p>
+                        <p className="f6 link dim db pointer" onClick={() => this.props.changeRoute('register')}>Rejestracja</p>
                     </div>
                 </form>
             </div>
