@@ -11,54 +11,11 @@ import Home from './Components/Home/Home';
 import Clarifai from 'clarifai';
 import 'tachyons';
 import Particles from 'react-particles-js';
+import params from './Components/params';
 
 const app = new Clarifai.App({
     apiKey: 'df7583b5e4b548d5a42a3ceb025315d6'
    });
-
-const params = {
-  "particles": {
-      "number": {
-          "value": 60,
-          "density": {
-              "enable": true,
-              "value_area": 1500
-          }
-      },
-      "line_linked": {
-          "enable": true,
-          "opacity": 0.02
-      },
-      "move": {
-          "direction": "right",
-          "speed": 0.05
-      },
-      "size": {
-          "value": 1
-      },
-      "opacity": {
-          "anim": {
-              "enable": true,
-              "speed": 1,
-              "opacity_min": 0.05
-          }
-      }
-  },
-  "interactivity": {
-      "events": {
-          "onclick": {
-              "enable": true,
-              "mode": "push"
-          }
-      },
-      "modes": {
-          "push": {
-              "particles_nb": 1
-          }
-      }
-  },
-  "retina_detect": true
-}
 
 const initialState = {
   users: {
@@ -80,6 +37,7 @@ class App extends Component {
     this.state = initialState;
   }
 
+  // Poniższa funkcja służy do wymierzania nowych wielkości boxow względem wielkości obrazka dla komponentu FaceImage
   boxUpdate = (response) => {
     const image = document.getElementById('faceImage');
     const width = Number(image.width);
@@ -97,6 +55,8 @@ class App extends Component {
     })
     this.setState({facePredict, loading:false})
   }
+
+  // Poniższe proste funkcje służa jedynie do nadania nowych wartości zmiennym
 
   inputUpdater = (v) => {
       this.setState({ url: v.target.value});
@@ -122,6 +82,7 @@ class App extends Component {
     this.setState({loading: v})
   }
 
+  // Na każde klikniecię przycisku z komponentu InputForm wykona się ta funckcja która wyśle zapytanie do servera api a odpowiedź przekaże dalej
   buttonClick = () => {
       this.setState({generalPredict: '', facePredict: '', input: this.state.url, loading: true})
       if (this.state.route === 'predictFace') {
@@ -149,6 +110,7 @@ class App extends Component {
 
   render() {
     return (
+      // Generowanie każdego komponentu na żywo
       <div className="App">
         <Particles params={params} className="particles"/>
         <Navigation changeRoute={this.changeRoute} route={this.state.route} isLogin={this.state.isLogin} changeLogin={this.changeLogin} />
