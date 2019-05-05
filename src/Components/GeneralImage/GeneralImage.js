@@ -1,5 +1,5 @@
 import React from 'react';
-import Predictions from '../Predictions/Predictions';
+import Predictions from './Predictions/Predictions';
 
 const GeneralImage = ({ input, predict, route, loading }) => {
         return (

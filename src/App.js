@@ -7,6 +7,7 @@ import GeneralImage from './Components/GeneralImage/GeneralImage';
 import FaceImage from './Components/FaceImage/FaceImage';
 import Register from './Components/Register/Register';
 import Login from './Components/Login/Login';
+import Home from './Components/Home/Home';
 import Clarifai from 'clarifai';
 import 'tachyons';
 import Particles from 'react-particles-js';
@@ -70,7 +71,7 @@ const initialState = {
   facePredict: '',
   loading: false,
   isLogin: false,
-  route: 'login'
+  route: 'home'
 }
 
 class App extends Component {
@@ -155,7 +156,9 @@ class App extends Component {
           ? <Login users={this.state.users} changeLogin={this.changeLogin} changeRoute={this.changeRoute} changeLoading={this.changeLoading} />
           : (this.state.route === 'register')
           ? <Register changeLogin={this.changeLogin} changeRoute={this.changeRoute} changeLoading={this.changeLoading} />
-          : <div className="flex flex-wrap flex-row ma5 pa3">
+          : (this.state.route === 'home')
+          ? <Home changeRoute={this.changeRoute} changeLogin={this.changeLogin} isLogin={this.state.isLogin}/>
+          : <div className="flex flex-wrap flex-row pa3">
             <InputForm buttonClick={this.buttonClick} inputUpdater={this.inputUpdater}/>
             {(this.state.generalPredict) ? <GeneralImage predict={this.state.generalPredict} input={this.state.input} route={this.state.route} loading={this.state.loading} /> : '' }
             {(this.state.facePredict) ? <FaceImage predict={this.state.facePredict} input={this.state.input} route={this.state.route} loading={this.state.loading} /> : '' }

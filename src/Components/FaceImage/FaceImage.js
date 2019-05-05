@@ -1,5 +1,5 @@
 import React from 'react';
-import BoxCreator from '../BoxCreator/BoxCreator';
+import BoxCreator from './BoxCreator/BoxCreator';
 import './FaceImage.css';
 
 class FaceImage extends React.Component {
@@ -11,7 +11,7 @@ class FaceImage extends React.Component {
     render () {
         return (
             <div>
-                <div style={(this.props.loading) ? {visibility: 'hidden'} : {visibility: 'visible'}} >
+                <div className="flex flex-wrap flex-row" style={(this.props.loading) ? {visibility: 'hidden'} : {visibility: 'visible'}} >
                     <div className="moj-kolor absolute pa3 ma3 br3 shadow-5">
                         <img
                             id="faceImage"
