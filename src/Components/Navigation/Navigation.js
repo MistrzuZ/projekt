@@ -7,7 +7,7 @@ class Navigation extends React.Component {
     }
     render () {
          return (
-            <div className="moj-kolor f5 flex flex-row justify-between">
+            <nav className="moj-kolor f5 flex flex-row justify-between">
                     {(this.props.isLogin) ?
                         <div className="menu flex flex-row justify-around">
                             <div onClick={() => this.props.changeRoute('home')} className="pa3 link dim pointer" style={(this.props.route === 'home') ? {opacity: 1, borderBottom: 'solid 1px'} : {opacity: 0.6}}>Home</div>
@@ -23,11 +23,15 @@ class Navigation extends React.Component {
                     }
                 <div className="menu flex flex-row justify-around">
                     {(this.props.isLogin)
-                        ? <div onClick={() => this.props.changeLogin(false)} className="ma2 pa2 link dim pointer">Wyloguj</div>
+                        ? <div className="flex">
+                            <div className="pa3">{'ilość użyć aplikacji: 1337'}</div>
+                            <div className="pa3">{'nazwa użytkownika'}</div>
+                            <div onClick={() => this.props.changeLogin(false)} className="ma2 pa2 link pointer o-60">Wyloguj</div>
+                        </div>
                         : ''
                     }
                 </div>
-            </div>
+            </nav>
         )
     }
 }

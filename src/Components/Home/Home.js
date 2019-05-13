@@ -21,8 +21,8 @@ class Home extends React.Component {
                         <li>Stworzenie aplikacji we frameworku React (język JSX), komunikującej się z serverem node.js (język JavaScript), a następnie z bazą danych Postgresql</li>
                         <li>Udostępnianie bazy danych użytkowników za pomocą API w formacie JSON</li>
                         <li>System <span onClick={() => {this.props.changeLogin(false); this.props.changeRoute('login')}} className="dim blue pointer">logowania</span> oraz <span onClick={() => {this.props.changeLogin(false); this.props.changeRoute('register')}} className="dim blue pointer">rejestracji</span></li>
-                        <li><span onClick={() => (this.props.isLogin) ? this.props.changeRoute('predictGeneral') : this.props.changeRoute('login')} className="dim blue pointer">Rozpozanie zawartośći</span> obrazka przy użyciu <span className="dim blue pointer" onClick={() => this.openLink('clarifai')}>Clarifai</span></li>
-                        <li><span onClick={() => (this.props.isLogin) ? this.props.changeRoute('predictFace') : this.props.changeRoute('login')} className="dim blue pointer">Rozpozanie twarzy</span> na obrazku przy użyciu <span className="dim blue pointer" onClick={() => this.openLink('clarifai')}>Clarifai</span></li>
+                        <li><span onClick={() => (this.props.isLogin) ? this.props.changeRoute('predictGeneral') : this.props.changeRoute('login')} className="dim blue pointer">Rozpozanie zawartośći</span> obrazka przy użyciu <a className="dim blue pointer" href="https://clarifai.com">Clarifai</a></li>
+                        <li><span onClick={() => (this.props.isLogin) ? this.props.changeRoute('predictFace') : this.props.changeRoute('login')} className="dim blue pointer">Rozpozanie twarzy</span> na obrazku przy użyciu <a className="dim blue pointer" href="https://clarifai.com">Clarifai</a></li>
                     </ul>
                 </div>
                 <div className="glowna pa5 mt7">

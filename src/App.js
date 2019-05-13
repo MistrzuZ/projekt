@@ -53,7 +53,6 @@ class App extends Component {
   }
 
   // Poniższe proste funkcje służa jedynie do nadania nowych wartości zmiennym
-
   inputUpdater = (v) => {
       this.setState({ url: v.target.value});
   }
@@ -107,7 +106,7 @@ class App extends Component {
   render() {
     return (
       // Generowanie każdego komponentu na żywo
-      <div className="App">
+      <main className="App">
         <Particles params={params} className="particles"/>
         <Navigation changeRoute={this.changeRoute} route={this.state.route} isLogin={this.state.isLogin} changeLogin={this.changeLogin} />
         {(this.state.route === 'login')
@@ -116,14 +115,14 @@ class App extends Component {
           ? <Register changeLogin={this.changeLogin} changeRoute={this.changeRoute} changeLoading={this.changeLoading} />
           : (this.state.route === 'home')
           ? <Home changeRoute={this.changeRoute} changeLogin={this.changeLogin} isLogin={this.state.isLogin}/>
-          : <div className="flex flex-wrap flex-row pa3">
+          : <section className="flex flex-wrap flex-row pa3">
             <InputForm buttonClick={this.buttonClick} inputUpdater={this.inputUpdater}/>
             {(this.state.generalPredict) ? <GeneralImage predict={this.state.generalPredict} input={this.state.input} route={this.state.route} loading={this.state.loading} /> : '' }
             {(this.state.facePredict) ? <FaceImage predict={this.state.facePredict} input={this.state.input} route={this.state.route} loading={this.state.loading} /> : '' }
-            </div>
+            </section>
         }
         {(this.state.loading) ? <Loading /> : '' }
-      </div>
+      </main>
     );
   }
 }
