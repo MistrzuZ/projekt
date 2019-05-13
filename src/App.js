@@ -18,10 +18,6 @@ const app = new Clarifai.App({
    });
 
 const initialState = {
-  users: {
-    email: 'john@gmail.com',
-    password: 'cookies'
-  },
   input: '',
   url: '',
   generalPredict: '',
@@ -115,7 +111,7 @@ class App extends Component {
         <Particles params={params} className="particles"/>
         <Navigation changeRoute={this.changeRoute} route={this.state.route} isLogin={this.state.isLogin} changeLogin={this.changeLogin} />
         {(this.state.route === 'login')
-          ? <Login users={this.state.users} changeLogin={this.changeLogin} changeRoute={this.changeRoute} changeLoading={this.changeLoading} />
+          ? <Login changeLogin={this.changeLogin} changeRoute={this.changeRoute} changeLoading={this.changeLoading} />
           : (this.state.route === 'register')
           ? <Register changeLogin={this.changeLogin} changeRoute={this.changeRoute} changeLoading={this.changeLoading} />
           : (this.state.route === 'home')

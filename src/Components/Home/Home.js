@@ -12,66 +12,6 @@ class Home extends React.Component {
         this.state = {}
     }
 
-    openLink = (v) => {
-        if (v === 'react') {
-            window.open('https://reactjs.org/', '_blank');
-        }
-        if (v === 'node') {
-            window.open('https://nodejs.org/', '_blank');
-        }
-        if (v === 'clarifai') {
-            window.open('https://clarifai.com/', '_blank');
-        }
-        if (v === 'tachyons') {
-            window.open('http://tachyons.io/', '_blank');
-        }
-        if (v === 'tachyons-doc') {
-            window.open('https://tachyons.io/docs/', '_blank');
-        }
-        if (v === 'react-spinners') {
-            window.open('https://www.npmjs.com/package/react-spinners', '_blank');
-        }
-        if (v === 'react-particles-js') {
-            window.open('https://www.npmjs.com/package/react-particles-js', '_blank');
-        }
-        if (v === 'clarifai-doc') {
-            window.open('https://clarifai.com/developer/guide/', '_blank');
-        }
-        if (v === 'postgresql') {
-            window.open('https://www.postgresql.org/', '_blank');
-        }
-        if (v === 'knexjs') {
-            window.open('https://knexjs.org/', '_blank');
-        }
-        if (v === 'expressjs') {
-            window.open('https://expressjs.com/', '_blank');
-        }
-        if (v === 'cors') {
-            window.open('https://www.npmjs.com/package/cors', '_blank');
-        }
-        if (v === 'nodemon') {
-            window.open('https://nodemon.io/', '_blank');
-        }
-        if (v === 'body-parser') {
-            window.open('https://www.npmjs.com/package/body-parser', '_blank');
-        }
-        if (v === 'bcrypt-nodejs') {
-            window.open('https://www.npmjs.com/package/bcrypt-nodejs', '_blank');
-        }
-        if (v === 'github-front') {
-            window.open('https://github.com/MistrzuZ/projekt', '_blank');
-        }
-        if (v === 'github-back') {
-            window.open('https://github.com/MistrzuZ/projekt-back', '_blank');
-        }
-        if (v === '') {
-            window.open('', '_blank');
-        }
-        if (v === '') {
-            window.open('', '_blank');
-        }
-    }
-
     render() {
         return (
             <div className="flex-column">
@@ -89,26 +29,26 @@ class Home extends React.Component {
                     <p className="f2 b">Opis techniczny projektu</p>
                     <p className="f4">Projekt został wykonany za pomocą</p>
                     <ul className="list">
-                        <li>Frameworka <span className="dim blue pointer" onClick={() => this.openLink('react')}>React</span></li>
-                        <li>Środowiska <span className="dim blue pointer" onClick={() => this.openLink('node')}>Node.js</span> a w nim Web Application Framework <span className="dim blue pointer" onClick={() => this.openLink('expressjs')}>Express</span></li>
-                        <li>API <span className="dim blue pointer" onClick={() => this.openLink('clarifai')}>Clarifai</span> (<span className="dim blue pointer" onClick={() => this.openLink('clarifai-doc')}>dokumentacja</span>)</li>
-                        <li>Relacyjna baza danych <span className="dim blue pointer" onClick={() => this.openLink('postgresql')}>Postgresql</span></li>
+                        <li>Frameworka <a className="dim blue pointer" href="https://reactjs.org/">React</a></li>
+                        <li>Środowiska <a className="dim blue pointer" href="https://nodejs.org/">Node.js</a> a w nim Web Application Framework <a href="https://expressjs.com/">Express</a></li>
+                        <li>API <a className="dim blue pointer" href="https://clarifai.com/">Clarifai</a> (<a className="dim blue pointer" href="https://clarifai.com/developer/guide/">dokumentacja</a>)</li>
+                        <li>Relacyjna baza danych <a className="dim blue pointer" href="https://www.postgresql.org/">Postgresql</a></li>
                     </ul>
                     <p className="f4 pt2">Komponenty użyte do wykonania projektu (front)</p>
                     <ul className="list">
-                        <li>Animacja <span className="dim blue pointer" onClick={() => this.openLink('react-spinners')}>react-spinners</span>, służy mi w czasie oczekiwania na odpowiedź od mojego servera lub strony <span className="dim blue pointer" onClick={() => this.openLink('clarifai')}>clarifai</span></li>
-                        <li>Do szybkiego budowania strony posłyżył mi <span className="dim blue pointer" onClick={() => this.openLink('tachyons')}>tachyons</span>, komponent dzięki któremu bez tworzenia pliku css mogłem dowolnie edytować styl każdego znacznika (z małą pomocą ich <span className="dim blue pointer" onClick={() => this.openLink('tachyons-doc')}>dokumentacji</span>)</li>
-                        <li>Animacja <span className="dim blue pointer" onClick={() => this.openLink('react-particles-js')}>react-particles-js</span> która wyświetla się jako tło projektu</li>
+                        <li>Animacja <a className="dim blue pointer" href="https://www.npmjs.com/package/react-spinners">react-spinners</a>, służy mi w czasie oczekiwania na odpowiedź od mojego servera lub strony <a className="dim blue pointer" href="https://clarifai.com">clarifai</a></li>
+                        <li>Do szybkiego budowania strony posłyżył mi <a className="dim blue pointer" href="http://tachyons.io/">tachyons</a>, komponent dzięki któremu bez tworzenia pliku css mogłem dowolnie edytować styl każdego znacznika (z małą pomocą ich <a className="dim blue pointer" href="https://tachyons.io/docs/">dokumentacji</a>)</li>
+                        <li>Animacja <a className="dim blue pointer" href="https://www.npmjs.com/package/react-particles-js">react-particles-js</a> która wyświetla się jako tło projektu</li>
                         <li></li>
                         <li></li>
                     </ul>
                     <p className="f4 pt2">Komponenty użyte do wykonania projektu (back)</p>
                     <ul className="list">
-                        <li><span onClick={() => this.openLink('knexjs')} className="dim blue pointer">Knexjs</span> użyłem to tworzenia prostych zapytań</li>
-                        <li>Pakiet <span onClick={() => this.openLink('cors')} className="dim blue pointer">cors</span> potrzebny w przypadku użycia zdalnych hostów</li>
-                        <li>Komponent <span onClick={() => this.openLink('body-parser')} className="dim blue pointer">body-parser</span> do parsowania treści</li>
-                        <li>Do automatycznego przeładowania strony komponent <span onClick={() => this.openLink('nodemon')} className="dim blue pointer">nodemon</span></li>
-                        <li>Hashowanie haseł komponentem <span onClick={() => this.openLink('bcrypt-nodejs')} className="dim blue pointer">bcrypt-nodejs</span> w celu bezpiecznego gromadzenia haseł użytkowników</li>
+                        <li><a className="dim blue pointer" href="https://knexjs.org/" >Knexjs</a> użyłem to tworzenia prostych zapytań</li>
+                        <li>Pakiet <a href="https://www.npmjs.com/package/cors" className="dim blue pointer">cors</a> potrzebny w przypadku użycia zdalnych hostów</li>
+                        <li>Komponent <a href="https://www.npmjs.com/package/body-parser" className="dim blue pointer">body-parser</a> do parsowania treści</li>
+                        <li>Do automatycznego przeładowania strony komponent <a href="https://nodemon.io/" className="dim blue pointer">nodemon</a></li>
+                        <li>Hashowanie haseł komponentem <a href="https://www.npmjs.com/package/bcrypt-nodejs" className="dim blue pointer">bcrypt-nodejs</a> w celu bezpiecznego gromadzenia haseł użytkowników</li>
                         <li></li>
                     </ul>
                 </div>
@@ -142,14 +82,14 @@ class Home extends React.Component {
                 <div className="glowna pa5 mt7">
                     <p className="f2 b">System kontroli wersji</p>
                     <div className="flex flex-wrap items-center center">
-                        <div className="pa3">Rezpozytorium Github projektu <span onClick={() => this.openLink('github-front')} className="dim blue pointer">(front)</span></div>
+                        <div className="pa3">Rezpozytorium Github projektu <a href="https://github.com/MistrzuZ/projekt" className="dim blue pointer">(front)</a></div>
                         <div className="pa3">
                             <img src={frontCommits} alt="" />
                         </div>
                     </div>
                     <div className="flex flex-wrap-reverse items-center center">
                         <div className="pa3">image xd</div>
-                        <div className="pa3">Rezpozytorium Github projektu <span onClick={() => this.openLink('github-back')} className="dim blue pointer">(back)</span></div>
+                        <div className="pa3">Rezpozytorium Github projektu <a href="https://github.com/MistrzuZ/projekt-back" className="dim blue pointer">(back)</a></div>
                     </div>
                 </div>
                 <div className="glowna pa5 mt7">

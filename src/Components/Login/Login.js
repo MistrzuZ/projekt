@@ -22,7 +22,7 @@ class Login extends React.Component {
         this.props.changeLoading(true)
         const email = this.state.email;
         const password = this.state.password;
-        if (email === this.props.users.email && password === this.props.users.password) {
+        if (email === 'admin' && password === '1337') {
             this.props.changeLogin(true)
             this.props.changeRoute('predictGeneral')
             this.props.changeLoading(false)
@@ -38,6 +38,7 @@ class Login extends React.Component {
                 <form className="measure moj-kolor pa4 ma4 br4 shadow-5">
                     <p className="f3 fw6 ph0 mh0">Logowanie</p>
                     <div className="mt3">
+                        <p>Defaultowo email: admin Hasło: 1337</p>
                         <label className="db fw6 lh-copy f6">Email</label>
                         <input
                             className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
