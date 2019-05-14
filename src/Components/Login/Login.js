@@ -1,4 +1,5 @@
 import React from 'react';
+import SimpleReactValidator from 'simple-react-validator';
 
 class Login extends React.Component {
     constructor(props) {
@@ -6,8 +7,9 @@ class Login extends React.Component {
         this.state = {
             email: '',
             password: '',
-            error: false
+            error: false,
         }
+        this.validator = new SimpleReactValidator();
     }
 
     emailUpdate = (email) => {
@@ -19,17 +21,29 @@ class Login extends React.Component {
     }
 
     clickLogin = () => {
-        this.props.changeLoading(true)
-        const email = this.state.email;
-        const password = this.state.password;
-        if (email === 'admin' && password === '1337') {
-            this.props.changeLogin(true)
-            this.props.changeRoute('predictGeneral')
-            this.props.changeLoading(false)
-        } else {
-            this.setState({error: true})
-            this.props.changeLoading(false)
-        }
+        if (this.validator.allValid()) {
+            const email = this.state.email;
+            const password = this.state.password;
+            fetch('http://localhost:3000/login', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ email, password })
+                })
+                .then(response => response.json())
+                .then(user => {
+                    if (user.id) {
+                        this.props.loadUser(user)
+                        this.props.changeLogin(true)
+                        this.props.changeRoute('predictGeneral')
+                    } else {
+                        this.setState({ error: true })
+                    }
+                })
+                .catch(err => console.log(err))
+          } else {
+            this.validator.showMessages();
+            this.forceUpdate();
+          }
     }
 
     render () {
@@ -45,6 +59,7 @@ class Login extends React.Component {
                             type="email"
                             onChange={this.emailUpdate}
                         />
+                        {this.validator.message('email', this.state.email, 'required|email')}
                     </div>
                     <div className="mv3">
                         <label className="db fw6 lh-copy f6">Hasło</label>
@@ -53,6 +68,7 @@ class Login extends React.Component {
                             type="password"
                             onChange={this.passwordUpdate}
                         />
+                        {this.validator.message('password', this.state.password, 'required|alpha_num_dash')}
                     </div>
                     <div>
                         <input
@@ -61,7 +77,7 @@ class Login extends React.Component {
                             value="Zaloguj"
                             onClick={this.clickLogin}
                         />
-                        {(this.state.error) ? <label className="db pt2 fw6 red lh-copy f6">Błędny login lub hasło</label> : ''}
+                        {(this.state.error) ? <label className="srv-validation-message db">Błędny login lub hasło</label> : ''}
                     </div>
                     <div className="lh-copy mt3">
                         <p className="f6 link dim db pointer" onClick={() => this.props.changeRoute('register')}>Rejestracja</p>

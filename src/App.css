@@ -18,3 +18,13 @@
   display: flex;
   justify-content: center;
 }
+
+.srv-validation-message {
+  padding: 5px;
+  font-size: 14px;
+  color: red;
+}
+
+form {
+  width: 300px;
+}

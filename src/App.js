@@ -24,7 +24,8 @@ const initialState = {
   facePredict: '',
   loading: false,
   isLogin: false,
-  route: 'home'
+  route: 'home',
+  user: {}
 }
 
 class App extends Component {
@@ -66,6 +67,10 @@ class App extends Component {
     this.setState({route: v, generalPredict: '', facePredict: ''})
   }
 
+  loadUser = (v) => {
+    this.setState({ user: v })
+  }
+
   changeLogin = (v) => {
     this.setState({isLogin: v})
     if (!v) {
@@ -96,7 +101,7 @@ class App extends Component {
             .then(generalModel => generalModel.predict(this.state.input, {language: 'en'}))
             .then(response => this.predictsAssign(response))
             .then(() => this.setState({loading: false}))
-            .catch((err) =>{
+            .catch(err =>{
                 console.log(err)
                 this.setState({loading: false, generalPredict: 'bad link'})
         })
@@ -110,9 +115,9 @@ class App extends Component {
         <Particles params={params} className="particles"/>
         <Navigation changeRoute={this.changeRoute} route={this.state.route} isLogin={this.state.isLogin} changeLogin={this.changeLogin} />
         {(this.state.route === 'login')
-          ? <Login changeLogin={this.changeLogin} changeRoute={this.changeRoute} changeLoading={this.changeLoading} />
+          ? <Login changeLogin={this.changeLogin} changeRoute={this.changeRoute} changeLoading={this.changeLoading} loadUser={this.loadUser} />
           : (this.state.route === 'register')
-          ? <Register changeLogin={this.changeLogin} changeRoute={this.changeRoute} changeLoading={this.changeLoading} />
+          ? <Register changeLogin={this.changeLogin} changeRoute={this.changeRoute} changeLoading={this.changeLoading} loadUser={this.loadUser} />
           : (this.state.route === 'home')
           ? <Home changeRoute={this.changeRoute} changeLogin={this.changeLogin} isLogin={this.state.isLogin}/>
           : <section className="flex flex-wrap flex-row pa3">
