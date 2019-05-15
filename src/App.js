@@ -8,14 +8,9 @@ import FaceImage from './Components/FaceImage/FaceImage';
 import Register from './Components/Register/Register';
 import Login from './Components/Login/Login';
 import Home from './Components/Home/Home';
-import Clarifai from 'clarifai';
 import 'tachyons';
 import Particles from 'react-particles-js';
 import params from './Components/params';
-
-const app = new Clarifai.App({
-    apiKey: 'df7583b5e4b548d5a42a3ceb025315d6'
-   });
 
 const initialState = {
   input: '',
@@ -36,6 +31,7 @@ class App extends Component {
 
   // Poniższa funkcja służy do wymierzania nowych wielkości boxow względem wielkości obrazka dla komponentu FaceImage
   boxUpdate = (response) => {
+    console.log(response)
     const image = document.getElementById('faceImage');
     const width = Number(image.width);
     const height = Number(image.height);
@@ -86,27 +82,40 @@ class App extends Component {
   buttonClick = () => {
       this.setState({generalPredict: '', facePredict: '', input: this.state.url, loading: true})
       if (this.state.route === 'predictFace') {
-          app.models
-              .predict(Clarifai.FACE_DETECT_MODEL, this.state.url)
-              .then(this.setState({facePredict: true}))
-              .then(response => this.boxUpdate(response))
-              .catch(err =>{
-                  console.log(err)
-                  this.setState({loading: false, facePredict: 'bad link'})
-              })
+          fetch('http://localhost:3000/zdjecieTwarz', {
+            method: 'put',
+            headers: {'Content-type': 'application/json'},
+            body: JSON.stringify({
+              type: this.state.route,
+              input: this.state.url
+            })
+          })
+          .then(this.setState({facePredict: true}))
+          .then(response => response.json())
+          .then(response => this.boxUpdate(response))
+          .catch(err =>{
+              console.log(err)
+              this.setState({loading: false, facePredict: 'bad link'})
+          })
       }
       if (this.state.route === 'predictGeneral') {
-        app.models
-            .initModel({id: Clarifai.GENERAL_MODEL, version: "aa7f35c01e0642fda5cf400f543e7c40"})
-            .then(generalModel => generalModel.predict(this.state.input, {language: 'en'}))
-            .then(response => this.predictsAssign(response))
-            .then(() => this.setState({loading: false}))
-            .catch(err =>{
-                console.log(err)
-                this.setState({loading: false, generalPredict: 'bad link'})
+        fetch('http://localhost:3000/zdjecieGeneral', {
+          method: 'put',
+          headers: {'Content-type': 'application/json'},
+          body: JSON.stringify({
+            type: this.state.route,
+            input: this.state.input
+          })
         })
+        .then(response => response.json())
+        .then(response => this.predictsAssign(response))
+        .then(() => this.setState({ loading: false }))
+        .catch(err =>{
+            console.log(err)
+            this.setState({loading: false, generalPredict: 'bad link'})
+        })
+      }
     }
-}
 
   render() {
     return (
