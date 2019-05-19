@@ -46,10 +46,10 @@ class Login extends React.Component {
           }
         if (email === 'admin' && password === "1337") {
             this.props.loadUser({
-                id: 0,
+                id: 1337,
                 name: "admin",
                 email: "admin",
-                uses: "0",
+                uses: "1330",
                 joined: "2019-05-13T21:14:10.526Z"
             })
             this.props.changeLogin(true)

@@ -31,7 +31,6 @@ class App extends Component {
 
   // Poniższa funkcja służy do wymierzania nowych wielkości boxow względem wielkości obrazka dla komponentu FaceImage
   boxUpdate = (response) => {
-    console.log(response)
     const image = document.getElementById('faceImage');
     const width = Number(image.width);
     const height = Number(image.height);
@@ -78,6 +77,19 @@ class App extends Component {
     this.setState({loading: v})
   }
 
+  updateUses = () => {
+    fetch('http://localhost:3000/uzycia', {
+      method: 'put',
+      headers: {'Content-type': 'application/json'},
+      body: JSON.stringify({ id: this.state.user.id })
+    })
+    .then(response => response.json())
+    .then(uses => {
+      const user = Object.assign(this.state.user, { uses })
+      this.setState({ user })
+    })
+  }
+
   // Na każde klikniecię przycisku z komponentu InputForm wykona się ta funckcja która wyśle zapytanie do servera api a odpowiedź przekaże dalej
   buttonClick = () => {
       this.setState({generalPredict: '', facePredict: '', input: this.state.url, loading: true})
@@ -86,16 +98,15 @@ class App extends Component {
             method: 'put',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
-              type: this.state.route,
               input: this.state.url
             })
           })
           .then(this.setState({facePredict: true}))
           .then(response => response.json())
           .then(response => this.boxUpdate(response))
+          .then(() => this.updateUses())
           .catch(err =>{
-              console.log(err)
-              this.setState({loading: false, facePredict: 'bad link'})
+            this.setState({loading: false, facePredict: 'bad link'})
           })
       }
       if (this.state.route === 'predictGeneral') {
@@ -103,16 +114,15 @@ class App extends Component {
           method: 'put',
           headers: {'Content-type': 'application/json'},
           body: JSON.stringify({
-            type: this.state.route,
-            input: this.state.input
+            input: this.state.url
           })
         })
         .then(response => response.json())
         .then(response => this.predictsAssign(response))
         .then(() => this.setState({ loading: false }))
+        .then(() => this.updateUses())
         .catch(err =>{
-            console.log(err)
-            this.setState({loading: false, generalPredict: 'bad link'})
+          this.setState({loading: false, generalPredict: 'bad link'})
         })
       }
     }
@@ -122,7 +132,7 @@ class App extends Component {
       // Generowanie każdego komponentu na żywo
       <main className="App">
         <Particles params={params} className="particles"/>
-        <Navigation changeRoute={this.changeRoute} route={this.state.route} isLogin={this.state.isLogin} changeLogin={this.changeLogin} />
+        <Navigation changeRoute={this.changeRoute} route={this.state.route} isLogin={this.state.isLogin} changeLogin={this.changeLogin} user={this.state.user} />
         {(this.state.route === 'login')
           ? <Login changeLogin={this.changeLogin} changeRoute={this.changeRoute} changeLoading={this.changeLoading} loadUser={this.loadUser} />
           : (this.state.route === 'register')

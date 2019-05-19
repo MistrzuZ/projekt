@@ -6,6 +6,7 @@ class Navigation extends React.Component {
         this.state ={}
     }
     render () {
+        const { user } = this.props;
          return (
             <nav className="moj-kolor f5 flex flex-row justify-between">
                     {(this.props.isLogin) ?
@@ -24,8 +25,8 @@ class Navigation extends React.Component {
                 <div className="menu flex flex-row justify-around">
                     {(this.props.isLogin)
                         ? <div className="flex">
-                            <div className="pa3">{'ilość użyć aplikacji: 1337'}</div>
-                            <div className="pa3">{'nazwa użytkownika'}</div>
+                            <div className="pa3">{`Użycia: ${user.uses}`}</div>
+                            <div className="pa3">{user.name}</div>
                             <div onClick={() => this.props.changeLogin(false)} className="ma2 pa2 link pointer o-60">Wyloguj</div>
                         </div>
                         : ''
