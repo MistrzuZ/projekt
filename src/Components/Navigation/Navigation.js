@@ -14,6 +14,7 @@ class Navigation extends React.Component {
                             <div onClick={() => this.props.changeRoute('home')} className="pa3 link dim pointer" style={(this.props.route === 'home') ? {opacity: 1, borderBottom: 'solid 1px'} : {opacity: 0.6}}>Home</div>
                             <div onClick={() => this.props.changeRoute('predictGeneral')} className="pa3 link dim pointer" style={(this.props.route === 'predictGeneral') ? {opacity: 1, borderBottom: 'solid 1px'} : {opacity: 0.6}}>Zawartość obrazka</div>
                             <div onClick={() => this.props.changeRoute('predictFace')} className="pa3 link dim pointer" style={(this.props.route === 'predictFace') ? {opacity: 1, borderBottom: 'solid 1px'} : {opacity: 0.6}}>Rozpoznanie twarzy</div>
+                            <div onClick={() => this.props.changeRoute('users')} className="pa3 link dim pointer" style={(this.props.route === 'users') ? {opacity: 1, borderBottom: 'solid 1px'} : {opacity: 0.6}}>Baza użytkowników</div>
                         </div>
                     :
                     <div className="menu flex flex-row justify-around">

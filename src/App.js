@@ -8,6 +8,7 @@ import FaceImage from './Components/FaceImage/FaceImage';
 import Register from './Components/Register/Register';
 import Login from './Components/Login/Login';
 import Home from './Components/Home/Home';
+import Users from './Components/Users/Users'
 import 'tachyons';
 import Particles from 'react-particles-js';
 import params from './Components/params';
@@ -139,6 +140,8 @@ class App extends Component {
           ? <Register changeLogin={this.changeLogin} changeRoute={this.changeRoute} changeLoading={this.changeLoading} loadUser={this.loadUser} />
           : (this.state.route === 'home')
           ? <Home changeRoute={this.changeRoute} changeLogin={this.changeLogin} isLogin={this.state.isLogin}/>
+          : (this.state.route === 'users')
+          ? <Users />
           : <section className="flex flex-wrap flex-row pa3">
             <InputForm buttonClick={this.buttonClick} inputUpdater={this.inputUpdater}/>
             {(this.state.generalPredict) ? <GeneralImage predict={this.state.generalPredict} input={this.state.input} route={this.state.route} loading={this.state.loading} /> : '' }

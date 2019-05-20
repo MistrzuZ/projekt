@@ -8,7 +8,7 @@ class Register extends React.Component {
             email: '',
             password: '',
             name: '',
-            error: false
+            error: ''
         }
         this.validator = new SimpleReactValidator();
     }
@@ -35,9 +35,10 @@ class Register extends React.Component {
                     this.props.changeLogin(true)
                     this.props.changeRoute('predictGeneral')
                 } else {
-                    this.setState({ error: true })
+                    this.setState({ error: 'Wybrany email jest już zajęty' })
                 }
             })
+            .catch(err => this.setState({ error: 'Brak połączenia z serverem'}))
         } else {
             this.validator.showMessages();
             this.forceUpdate();
@@ -57,6 +58,7 @@ class Register extends React.Component {
                             onChange={this.handleChange('email')}
                         />
                         {this.validator.message('email', this.state.email, 'required|email')}
+                        <p>(nie trzeba potwierdzać)</p>
                     </div>
                     <div className="mt3">
                         <label className="db fw6 lh-copy f6">Nazwa</label>
@@ -83,7 +85,7 @@ class Register extends React.Component {
                             value="Zaloguj"
                             onClick={this.clickRegister}
                         />
-                        {(this.state.error) ? <label className="srv-validation-message db">Wybrany email jest już zajęty</label> : ''}
+                        {(this.state.error) ? <label className="srv-validation-message db">{this.state.error}</label> : ''}
                     </div>
                     <div className="lh-copy mt3">
                         <p className="f6 link dim db pointer" onClick={() => this.props.changeRoute('login')}>Logowanie</p>

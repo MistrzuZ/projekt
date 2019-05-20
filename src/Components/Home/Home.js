@@ -5,6 +5,7 @@ import logowanie from './Screens/logowanie.png';
 import przypuszczenia from './Screens/przypuszczenia.png';
 import rejestracja from './Screens/rejestracja.png';
 import frontCommits from './Screens/front-commits.png';
+import backCommits from './Screens/back-commits.png';
 
 class Home extends React.Component {
     constructor(props) {
@@ -14,12 +15,12 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div className="flex-column">
+            <div className="flex-column w-80 center">
                 <div className="glowna pa5">
                     <p className="f2 b">Opis założeń projektu</p>
                     <ul className="list">
                         <li>Stworzenie aplikacji we frameworku React (język JSX), komunikującej się z serverem node.js (język JavaScript), a następnie z bazą danych Postgresql</li>
-                        <li>Udostępnianie bazy danych użytkowników za pomocą API w formacie JSON</li>
+                        <li>Udostępnianie <span onClick={() => (this.props.isLogin) ? this.props.changeRoute('users') : this.props.changeRoute('login')} className="dim blue pointer">bazy danych użytkowników</span> za pomocą API w formacie JSON</li>
                         <li>System <span onClick={() => {this.props.changeLogin(false); this.props.changeRoute('login')}} className="dim blue pointer">logowania</span> oraz <span onClick={() => {this.props.changeLogin(false); this.props.changeRoute('register')}} className="dim blue pointer">rejestracji</span></li>
                         <li><span onClick={() => (this.props.isLogin) ? this.props.changeRoute('predictGeneral') : this.props.changeRoute('login')} className="dim blue pointer">Rozpozanie zawartośći</span> obrazka przy użyciu <a className="dim blue pointer" href="https://clarifai.com">Clarifai</a></li>
                         <li><span onClick={() => (this.props.isLogin) ? this.props.changeRoute('predictFace') : this.props.changeRoute('login')} className="dim blue pointer">Rozpozanie twarzy</span> na obrazku przy użyciu <a className="dim blue pointer" href="https://clarifai.com">Clarifai</a></li>
@@ -39,8 +40,7 @@ class Home extends React.Component {
                         <li>Animacja <a className="dim blue pointer" href="https://www.npmjs.com/package/react-spinners">react-spinners</a>, służy mi w czasie oczekiwania na odpowiedź od mojego servera lub strony <a className="dim blue pointer" href="https://clarifai.com">clarifai</a></li>
                         <li>Do szybkiego budowania strony posłyżył mi <a className="dim blue pointer" href="http://tachyons.io/">tachyons</a>, komponent dzięki któremu bez tworzenia pliku css mogłem dowolnie edytować styl każdego znacznika (z małą pomocą ich <a className="dim blue pointer" href="https://tachyons.io/docs/">dokumentacji</a>)</li>
                         <li>Animacja <a className="dim blue pointer" href="https://www.npmjs.com/package/react-particles-js">react-particles-js</a> która wyświetla się jako tło projektu</li>
-                        <li></li>
-                        <li></li>
+                        <li>Do walidacji danych logowania i rejestracji użyłem <a href="https://www.npmjs.com/package/simple-react-validator" className="dim blue pointer">simple-react-validator</a></li>
                     </ul>
                     <p className="f4 pt2">Komponenty użyte do wykonania projektu (back)</p>
                     <ul className="list">
@@ -49,7 +49,6 @@ class Home extends React.Component {
                         <li>Komponent <a href="https://www.npmjs.com/package/body-parser" className="dim blue pointer">body-parser</a> do parsowania treści</li>
                         <li>Do automatycznego przeładowania strony komponent <a href="https://nodemon.io/" className="dim blue pointer">nodemon</a></li>
                         <li>Hashowanie haseł komponentem <a href="https://www.npmjs.com/package/bcrypt-nodejs" className="dim blue pointer">bcrypt-nodejs</a> w celu bezpiecznego gromadzenia haseł użytkowników</li>
-                        <li></li>
                     </ul>
                 </div>
                 <div className="glowna pa5 mt7">
@@ -88,7 +87,9 @@ class Home extends React.Component {
                         </div>
                     </div>
                     <div className="flex flex-wrap-reverse items-center center">
-                        <div className="pa3">image xd</div>
+                        <div className="pa3">
+                            <img src={backCommits} alt="" />
+                        </div>
                         <div className="pa3">Rezpozytorium Github projektu <a href="https://github.com/MistrzuZ/projekt-back" className="dim blue pointer">(back)</a></div>
                     </div>
                 </div>
