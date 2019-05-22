@@ -19,7 +19,7 @@ class Register extends React.Component {
 
     clickRegister = () => {
         if (this.validator.allValid()) {
-            fetch('https://git.heroku.com/protected-oasis-41147.git/rejestracja', {
+            fetch('https://protected-oasis-41147.herokuapp.com/rejestracja', {
                 method: 'post',
                 headers: {'Content-type': 'application/json'},
                 body: JSON.stringify({

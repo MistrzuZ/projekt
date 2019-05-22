@@ -30,7 +30,7 @@ class SimpleTable extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000/')
+    fetch('https://protected-oasis-41147.herokuapp.com/')
     .then(response => response.json())
     .then(users =>{ this.setState({ users })})
   }

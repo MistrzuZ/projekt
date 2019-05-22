@@ -79,7 +79,7 @@ class App extends Component {
   }
 
   updateUses = () => {
-    fetch('https://git.heroku.com/protected-oasis-41147.git/uzycia', {
+    fetch('https://protected-oasis-41147.herokuapp.com/uzycia', {
       method: 'put',
       headers: {'Content-type': 'application/json'},
       body: JSON.stringify({ id: this.state.user.id })
@@ -95,7 +95,7 @@ class App extends Component {
   buttonClick = () => {
       this.setState({generalPredict: '', facePredict: '', input: this.state.url, loading: true})
       if (this.state.route === 'predictFace') {
-          fetch('https://git.heroku.com/protected-oasis-41147.git/zdjecieTwarz', {
+          fetch('https://protected-oasis-41147.herokuapp.com/zdjecieTwarz', {
             method: 'put',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
@@ -111,7 +111,7 @@ class App extends Component {
           })
       }
       if (this.state.route === 'predictGeneral') {
-        fetch('https://git.heroku.com/protected-oasis-41147.git/zdjecieGeneral', {
+        fetch('https://protected-oasis-41147.herokuapp.com/zdjecieGeneral', {
           method: 'put',
           headers: {'Content-type': 'application/json'},
           body: JSON.stringify({
