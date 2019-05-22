@@ -24,7 +24,7 @@ class Login extends React.Component {
         const email = this.state.email;
         const password = this.state.password;
         if (this.validator.allValid()) {
-            fetch('http://localhost:3000/login', {
+            fetch('https://git.heroku.com/protected-oasis-41147.git/login', {
                 method: 'post',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ email, password })
