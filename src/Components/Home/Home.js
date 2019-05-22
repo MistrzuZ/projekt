@@ -41,6 +41,7 @@ class Home extends React.Component {
                         <li>Do szybkiego budowania strony posłyżył mi <a className="dim blue pointer" href="http://tachyons.io/">tachyons</a>, komponent dzięki któremu bez tworzenia pliku css mogłem dowolnie edytować styl każdego znacznika (z małą pomocą ich <a className="dim blue pointer" href="https://tachyons.io/docs/">dokumentacji</a>)</li>
                         <li>Animacja <a className="dim blue pointer" href="https://www.npmjs.com/package/react-particles-js">react-particles-js</a> która wyświetla się jako tło projektu</li>
                         <li>Do walidacji danych logowania i rejestracji użyłem <a href="https://www.npmjs.com/package/simple-react-validator" className="dim blue pointer">simple-react-validator</a></li>
+                        <li>Jako tabelki w bazie danych użyłem <a href="https://material-ui.com/" className="dim blue pointer">material-ui</a></li>
                     </ul>
                     <p className="f4 pt2">Komponenty użyte do wykonania projektu (back)</p>
                     <ul className="list">
